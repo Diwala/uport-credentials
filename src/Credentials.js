@@ -236,9 +236,10 @@ class Credentials {
    * @param    {String}      [opts.riss]         The DID of the identity you want to sign the Verified Claim
    * @param    {String}      [opts.callbackUrl]  The url to receive the response of this request
    * @param    {Object[]}    [opts.vc]           An array of JWTs about the requester, signed by 3rd parties
+   * @param    {String}      [expiresIn]           An array of JWTs about the requester, signed by 3rd parties
    * @returns  {Promise<Object, Error>}          A promise which resolves with a signed JSON Web Token or rejects with an error
    */
-  createVerificationSignatureRequest(unsignedClaim, { aud, sub, riss, callbackUrl, vc } = {}) {
+  createVerificationSignatureRequest(unsignedClaim, { aud, sub, riss, callbackUrl, vc } = {}, expiresIn) {
     return this.signJWT({
       unsignedClaim,
       sub,
@@ -247,7 +248,7 @@ class Credentials {
       vc,
       callback: callbackUrl,
       type: Types.VERIFICATION_SIGNATURE_REQUEST,
-    })
+    },expiresIn)
   }
 
   /**
